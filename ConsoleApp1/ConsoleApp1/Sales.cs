@@ -18,8 +18,8 @@ namespace Exercise11
         private double productPrice;
         //Private int productPrice;
 
-      private string productName;
-        private int Price;
+       private string productName;
+        public int Price;
         public DateTime saleTransactionTime;
 
         public SaleTransaction(Client client, string productName, double productPrice)
