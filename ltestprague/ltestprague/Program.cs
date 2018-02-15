@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PRAGUE_PARKING
 {
@@ -25,7 +21,11 @@ namespace PRAGUE_PARKING
             // prog.arParking[7] = "car555";
             // prog.arParking[15] = "car982";
             // prog.arParking[20] = "mot214:mot821";
-            // prog.arParking[12] = "mot214:";
+            prog.arParking[0] = "mot123:";
+            prog.arParking[1] = "car123";
+            prog.arParking[2] = "mot963:";
+            prog.arParking[3] = "car678";
+
 
             prog.askUserForInput();
 
@@ -115,9 +115,9 @@ namespace PRAGUE_PARKING
 
             for (int i = 0; i < 100; i++)
             {
-                if (arParking[i] == null)
+                if (arParking[i] == null) // if all the spot is empty
                 {
-                    if (userInput == 2)
+                    if (userInput == 2) // user wants to park a car
                     {
                         arParking[i] = vlicenseplate;
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -125,7 +125,7 @@ namespace PRAGUE_PARKING
                         vehicleParked = true;
                         break;
                     }
-                    else
+                    else // user wants to park a motorcycle
                     {
                         arParking[i] = vlicenseplate + ":";
                         Console.ForegroundColor = ConsoleColor.Green;
@@ -134,15 +134,18 @@ namespace PRAGUE_PARKING
                         break;
                     }
                 }
-                else if (arParking[i].Contains(":"))
+                else if (arParking[i].Contains(":")) // spot is not empty, already contain a motorcycle
                 {
-                    if (userInput == 1)
+                    if (userInput == 1) // user wants to park a motorcycle
                     {
-                        arParking[i] = arParking[i] + vlicenseplate;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Your motorcycle has been parked at spot number: " + i + " slot: 1");
-                        vehicleParked = true;
-                        break;
+                        if (arParking[i].EndsWith(":")) // if the string ends with a : then we can add one more motorcycle
+                        {
+                            arParking[i] = arParking[i] + vlicenseplate;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Your motorcycle has been parked at spot number: " + i + " slot: 1");
+                            vehicleParked = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -210,6 +213,133 @@ namespace PRAGUE_PARKING
             Console.ResetColor();
             Console.ReadLine();
 
+        }
+
+        void moveVehicle(string vehiclePlate)
+        {
+
+            // if a vehicle is not provided, ask the user to enter his vehicle plate
+            string vlicenseplate;
+            if (vehiclePlate == null)
+            {
+                Console.WriteLine("\nPlease enter the license plate number of the vehicle you wish to move: ");
+                vlicenseplate = Console.ReadLine();
+            }
+            else
+            {
+                vlicenseplate = vehiclePlate;
+            }
+
+            if (vehiclePlate == null)
+            {
+                Console.WriteLine("\nPlease enter the spot number you wish to move to: ");
+            }
+            else
+            {
+                Console.WriteLine("\nPlease enter another spot number: ");
+            }
+
+            int spotNumber = Int32.Parse(Console.ReadLine());
+
+            // find location of the vehicle
+            // step 1: find the user vehicle details
+            Boolean vehicleFound = false;
+            Boolean isMotorcycle = false;
+            int vehicleIndex = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                if (arParking[i] != null && arParking[i].Contains(vlicenseplate))
+                { // vehicle found on that spot
+                    vehicleFound = true;
+                    vehicleIndex = i;
+                    if (arParking[i].Contains(":"))
+                    { // the spot contains : this means its a motorcycle
+                        isMotorcycle = true;
+                    }
+                }
+            }
+
+            if (!vehicleFound)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Vehicle not found!");
+            }
+            else
+            {
+                // step 2: check if the new spot is available for the user vehicle
+                Boolean vehicleCanBeMoved = false;
+                if (arParking[spotNumber] == null)
+                { // spot can hold a car or motorcycle since its empty
+                    vehicleCanBeMoved = true;
+                }
+                else if (arParking[spotNumber].EndsWith(":"))
+                { // spot can hold another motorcycle
+                    if (isMotorcycle)
+                    {
+                        vehicleCanBeMoved = true;
+                    }
+                }
+
+                if (!vehicleCanBeMoved)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("New spot is full");
+                    Console.ResetColor();
+                    moveVehicle(vlicenseplate);
+                }
+                else
+                {
+                    // step 3: move the vehicle
+
+                    // 3.1: remove the vehicle from the old post
+                    if (isMotorcycle)
+                    {
+                        string[] mcs = arParking[vehicleIndex].Split(':');
+                        string mc1 = mcs[0];
+                        string mc2 = mcs[1];
+                        if (mc1 == vlicenseplate) // if our motorcycle is parked in the slot 1 of this spot
+                        {
+                            if (mc2.Length > 0)
+                            {
+                                arParking[vehicleIndex] = mc2 + ":";
+                            }
+                            else
+                            {
+                                arParking[vehicleIndex] = null;
+                            }
+                        }
+                        else
+                        { // if our motorcycle is parked in the slot 2 of this spot
+                            arParking[vehicleIndex] = mc1 + ":";
+                        }
+                    }
+                    else
+                    {
+                        arParking[vehicleIndex] = null;
+                    }
+
+                    // 3.2: add the vehicle to the new spot
+                    if (isMotorcycle)
+                    {
+                        if (arParking[vehicleIndex] == null)
+                        {
+                            arParking[spotNumber] = vlicenseplate + ":";
+                        }
+                        else
+                        {
+                            arParking[spotNumber] = arParking[spotNumber] + vlicenseplate;
+                        }
+                    }
+                    else
+                    {
+                        arParking[spotNumber] = vlicenseplate;
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Your vehicle has been moved to the new spot!");
+                }
+            }
+            Console.ResetColor();
+            Console.ReadLine();
         }
 
         void listParkingLots()
@@ -303,7 +433,7 @@ namespace PRAGUE_PARKING
                 Console.WriteLine();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Please Select one of the following choices: 1. Park, 2. Dismiss, 3. Search, 4. Exit");
+                Console.WriteLine("Please Select one of the following choices: 1. Park, 2. Dismiss, 3. Move, 4. Search, 5. Exit\n");
                 //Console.WriteLine("1. Park, 2. Dismiss, 3. Search, 4. List All, 5. Exit");
                 Console.ResetColor();
 
@@ -319,13 +449,12 @@ namespace PRAGUE_PARKING
                         dismissVechicle();
                         break;
                     case 3:
+                        moveVehicle(null);
+                        break;
+                    case 4:
                         SearchVehicle();
                         break;
-                    // case 4:
-                    //     listParkingLots();
-                    //     break;
-                    // case 5:
-                    case 4:
+                    case 5:
                         Console.WriteLine("Are you sure you want to exit the program? (Y/N)");
                         string input = Console.ReadLine();
                         if (input == "y" || input == "Y")
@@ -343,10 +472,5 @@ namespace PRAGUE_PARKING
 
         }
 
-
-        static void RemoveVehicle()
-        {
-
-        }
     }
 }
