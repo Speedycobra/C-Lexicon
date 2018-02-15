@@ -35,7 +35,7 @@ namespace Exercise11
             Client c1 = new Client("Alireza", "Nasrollahzadeh", 38);
             //Console.WriteLine(e1);
             //Console.WriteLine(c1);
-            Console.WriteLine("Initiated Persons " + Person.personCounter + " \n" );
+            Console.WriteLine("Initiated Persons " + " " +  Person.personCounter + " \n" );
 
             e1.AddSale(c1, "melon", 45);
             //e1.listSales;
