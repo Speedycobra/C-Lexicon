@@ -28,7 +28,7 @@ namespace Exercise11
             personCounter++;
         }
 
-        public string firsttName
+        public string firstName
         {
             get
             {

@@ -15,14 +15,12 @@ namespace Exercise11
     class SaleTransaction
     {
         public Client Client;
-        private double productPrice;
-        //Private int productPrice;
-
-       private string productName;
+        public float productPrice;
+        public string productName;
         public int Price;
         public DateTime saleTransactionTime;
 
-        public SaleTransaction(Client client, string productName, double productPrice)
+        public SaleTransaction(Client client, string productName, float productPrice)
 
         {
             Client = client;
@@ -33,7 +31,7 @@ namespace Exercise11
         }
         public override string ToString()
         {
-            return Client.firsttName + " " + Client.lastName + " " + productName + " " + productPrice + " " + saleTransactionTime;
+            return Client.firstName + " " + Client.lastName + " " + productName + " " + productPrice + " " + saleTransactionTime;
 
         }
     }

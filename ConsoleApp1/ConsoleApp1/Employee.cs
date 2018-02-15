@@ -29,7 +29,7 @@ namespace Exercise11
             return "I am an Employee: " + base.ToString() + " \nMy salary is " + salary + "\n";
         }
 
-        public void AddSale(Client Klient, string produktNamn, double Pris)
+        public void AddSale(Client Klient, string produktNamn, float Pris)
         {
             SaleTransaction tempSale = new SaleTransaction(Klient, produktNamn, Pris);
             listSales.Add(tempSale);
@@ -42,26 +42,34 @@ namespace Exercise11
          * Let the third method be to calculate the average sale for the employee. 
          * Then lastly, create a method that prints out the sales statistics for a specific employee. 
          */
-        int GetNumberOfSales()
+        public int GetNumberOfSales()
         {
             return listSales.Count;
         }
-        float GetSalesTotal()
+
+        public float GetSalesTotal()
         {
             float totalsale = 0;
-            foreach (SaleTransaction o in listSales)
+            foreach (SaleTransaction sale in listSales)
             {
-                totalsale += o.Price;
-               // return totalsale//Console.WriteLine(o.ToString());
+                totalsale += sale.productPrice;
             }
-
-
-
+            return totalsale;
         }
-        void GetSalesAverage()
+        
+        public float GetSalesAverage()
         {
-
+            return GetSalesTotal() / GetNumberOfSales();
         }
+
+        public void printStatistics() {
+            Console.WriteLine("Following is statistic for " + firstName + " " + lastName + "!");
+            Console.WriteLine("Number of sales: " + GetNumberOfSales());
+            Console.WriteLine("Sales total: $" + GetSalesTotal());
+            Console.WriteLine("Average sales: $" + GetSalesAverage());
+        }
+
+
     }
 
 
