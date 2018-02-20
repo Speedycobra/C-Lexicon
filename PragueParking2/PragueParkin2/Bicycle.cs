@@ -3,9 +3,9 @@ using System;
 namespace PragueParking2 {
     public class Bicycle : Vehicle
     {
-        public Bicycle(string regNr, DateTime arrivalTime, int size) : base(regNr, arrivalTime, size)
+        public Bicycle(string regNr, DateTime arrivalTime) : base(regNr, arrivalTime, 1)
         {
-            this.size = 1;
+
         }
     }
 
