@@ -7,7 +7,7 @@ namespace PragueParking2
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Prague Parking2.0!");
+            Console.WriteLine("Welcome to Prague Parking 2.0!");
 
             ParkingLot parking = new ParkingLot();
 
