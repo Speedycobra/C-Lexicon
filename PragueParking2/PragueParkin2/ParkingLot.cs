@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PragueParking2 {
+namespace PragueParking2
+{
 
-    public class ParkingLot {
+    public class ParkingLot
+    {
 
         const int parkingSize = 100;
 
@@ -14,30 +16,36 @@ namespace PragueParking2 {
 
         private int numFreeSizeUnits;
 
-        public void add(Vehicle vehicle) {
+        public void add(Vehicle vehicle)
+        {
             for (int i = 0; i < parkingSize; i++) 
             {
                 
             }
         }
 
-        public void remove(Vehicle vehicle) {
+        public void remove(Vehicle vehicle)
+        {
 
         }
 
-        public void search() {
+        public void search()
+        {
 
         }
 
-        public void move() {
+        public void move()
+        {
 
         }
 
-        public void content() {
+        public void content()
+        {
 
         }
 
-        public void optimize() {
+        public void optimize()
+        {
 
         }
 
