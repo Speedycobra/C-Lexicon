@@ -13,9 +13,10 @@ namespace PragueParking2
 
             Car car1 = new Car("CAR111", DateTime.Now);
             parking.add(car1);
-
+            
             Motorcycle mot1 = new Motorcycle("MOT111", DateTime.Now);
             parking.add(mot1);
+
             Motorcycle mot2 = new Motorcycle("MOT222", DateTime.Now);
             parking.add(mot2);
             
@@ -34,9 +35,41 @@ namespace PragueParking2
             Motorcycle mot4 = new Motorcycle("MOT444", DateTime.Now);
             parking.add(mot4);
 
-            parking.printParking();
+            Bicycle bic2 = new Bicycle("BIC666", DateTime.Now);
+            parking.add(bic2);
+
+            Bicycle bic3 = new Bicycle("BIC888", DateTime.Now);
+            parking.add(bic3);
+
+            Bicycle bic4 = new Bicycle("BIC999", DateTime.Now);
+            parking.add(bic4);
+
+            //parking.printParking();
+            PrintState(parking);
             Console.ReadLine();
 
+        }
+        static void PrintState(ParkingLot p)
+        {
+            int index = 0;
+            string[] parking = p.Content();
+            for (int i = 0; i < 50; i++)
+            {
+                for (int x = 0; x < 2; x++)
+                {
+                    //  Console.ForegroundColor = ConsoleColor.White;
+                    Console.CursorLeft = x * 50;
+                    if (index < 9) Console.Write(" ");
+                    if (index < 99) Console.Write(" ");
+                    if (parking[index].Equals(""))
+                        Console.Write("{0}: [Spot Empty]", index + 1);
+                    if (!parking[index].Equals(""))
+                        Console.Write("{0}: {1} ", index + 1, parking[index].ToString());
+
+                    index++;
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

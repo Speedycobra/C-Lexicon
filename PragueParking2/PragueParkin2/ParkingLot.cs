@@ -76,9 +76,16 @@ namespace PragueParking2
 
         }
 
-        public void content()
+        public string[] Content()
         {
-
+           
+                string[] allSlot = new string[parkingSize];
+                for (int i = 0; i < parkingSize; i++)
+                {
+                    allSlot[i] = slots[i].Content();
+                }
+                return allSlot;
+           
         }
 
         public void optimize()

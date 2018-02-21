@@ -7,6 +7,7 @@ namespace PragueParking2
         public Car(string regNr, DateTime arrivalTime) : base(regNr, arrivalTime, 4)
         {
             
+        
         }
     }
 
