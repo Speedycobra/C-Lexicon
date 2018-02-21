@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PragueParking2 {
+namespace PragueParking2
+{
 
-    public class ParkingLot {
+    public class ParkingLot
+    {
 
         const int parkingSize = 100;
 
@@ -14,18 +16,22 @@ namespace PragueParking2 {
 
         private int numFreeSizeUnits;
 
-        public ParkingLot() {
-            for (int i = 0; i < parkingSize; i++) {
+        public ParkingLot()
+        {
+            for (int i = 0; i < parkingSize; i++)
+            {
                 slots[i] = new ParkingSlot();
             }
         }
 
-        public Boolean add(Vehicle vehicle) {
+        public Boolean add(Vehicle vehicle)
+        {
             Boolean addedVehicle = false;
             for (int i = 0; i < parkingSize; i++) 
             {
                 ParkingSlot slot = slots[i];
-                if (vehicle.size <= slot.freeSize) {
+                if (vehicle.size <= slot.freeSize)
+                {
                     slot.add(vehicle);
                     addedVehicle = true;
                     break;
@@ -34,13 +40,15 @@ namespace PragueParking2 {
             return addedVehicle;
         }
 
-        public Boolean remove(Vehicle vehicle) {
+        public Boolean remove(Vehicle vehicle)
+        {
             Boolean removed = false;
             for (int i = 0; i < parkingSize; i++) 
             {
                 ParkingSlot slot = slots[i];
                 Vehicle tmp = slot.search(vehicle.regNr);
-                if (tmp != null) {
+                if (tmp != null)
+                {
                     slot.remove(tmp);
                     removed = true;
                 }
@@ -48,32 +56,38 @@ namespace PragueParking2 {
             return removed;
         }
 
-        public Vehicle search(string regNr) {
+        public Vehicle search(string regNr)
+        {
             Vehicle tmp = null;
             for (int i = 0; i < parkingSize; i++) 
             {
                 ParkingSlot slot = slots[i];
                 tmp = slot.search(regNr);
-                if (tmp != null) {
+                if (tmp != null)
+                {
                     return tmp;
                 }
             }
             return tmp;
         }
 
-        public void move() {
+        public void move()
+        {
 
         }
 
-        public void content() {
+        public void content()
+        {
 
         }
 
-        public void optimize() {
+        public void optimize()
+        {
 
         }
 
-        public void printParking() {
+        public void printParking()
+        {
 
             for (int i = 0; i < parkingSize; i++)
             {
