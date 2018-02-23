@@ -28,12 +28,12 @@ namespace Parking2._0GRP
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("                                    Welcome to Prague Parking2,0!");
-            Console.WriteLine("Choose one");
-            Console.WriteLine("1. ADD");
-            Console.WriteLine("2. REMOVE");
-            Console.WriteLine("3. SEARCH");
-            Console.WriteLine("4. MOVE");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("Choose one"+" 1.ADD "+" 2.REMOVE " + " 3.SEARCH " + " 4.MOVE " + " 5.Exit");
+            //Console.WriteLine("1. ADD");
+            //Console.WriteLine("2. REMOVE");
+            //Console.WriteLine("3. SEARCH");
+            //Console.WriteLine("4. MOVE");
+            //Console.WriteLine("5. Exit");
             int userChoice = Int32.Parse(Console.ReadLine());
             int place;
             switch (userChoice)
