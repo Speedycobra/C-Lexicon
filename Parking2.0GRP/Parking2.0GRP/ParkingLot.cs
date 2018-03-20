@@ -62,7 +62,7 @@ namespace Parking2._0GRP
             }
             return false;
         }
-
+        
         public string Remove(string regNr)
         {
             int plats;
@@ -72,31 +72,14 @@ namespace Parking2._0GRP
             if (plats >= 0)
             {
                 now = now.AddHours(1);
-                tempV = parkingSlots[plats].Remove(regNr);
-                TimeSpan ts = (now - tempV.ArrivalTime);
-                return "Remove the vehicle at " + (plats + 1) + " and the parked time is hour:" + ts.ToString(@"hh\:mm\:ss");
+                tempV = parkingSlots[plats].Remove(regNr);    
+                //Beräknar tiden man har parkerat.
+                TimeSpan ts = (now - tempV.ArrivalTime);          
+                return "Remove the vehicle at " + (plats + 1) + " and the parked time is :" + ts.ToString(@"hh\:mm\:ss");
             }
             return "Can´t find the vehicle you want to remove.";
         }
-        //public string Remove(string regNr)
-        //{
-        //    int plats, minute = 0, hour = 0;
-        //    Vehicle tempV;
-        //    DateTime now = DateTime.Now;
-        //    plats = Search(regNr);
-        //    if (plats >= 0)
-        //    {
-        //        now = now.AddHours(1);
-        //        tempV = parkingSlots[plats].Remove(regNr);
-        //        hour = now.Hour - tempV.ArrivalTime.Hour;
-        //        minute = now.Minute - tempV.ArrivalTime.Hour;
-        //        if (minute < 0)
-        //            minute *= -1;
-        //        return "Remove the vehicle at " + (plats + 1) + " and the parked time is hour:" + hour + " minute:" + minute + "";
-        //    }
-        //    return "Can´t find the vehicle you want to remove.";
-        //}
-
+       
         public int Search(string regNr)
         {
             for (int i = 0; i < parkingSize; i++)
@@ -133,8 +116,8 @@ namespace Parking2._0GRP
                     count++;
             }
             numFreeSizeUnits = count;
-
         }
+
         public void SeedArray()
         {
             Random rd = new Random(DateTime.Now.Millisecond);
@@ -216,7 +199,6 @@ namespace Parking2._0GRP
 
         static string CreateVehicleReg(Random r)
         {
-
             string regNr = "";
             char c;
             //Skapar a-z 3 bokstäver
@@ -233,7 +215,6 @@ namespace Parking2._0GRP
                 Task.Delay(3000);
                 regNr = regNr.Insert(regNr.Length, c.ToString());
             }
-
             return regNr;
         }
 

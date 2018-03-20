@@ -36,6 +36,7 @@ namespace Parking2._0GRP
             }
             return tmp;
         }
+
         public bool Search(string regNr)
         {
             foreach (Vehicle aVehicle in vehicles)

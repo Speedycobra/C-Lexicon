@@ -11,6 +11,7 @@ namespace Parking2._0GRP
         private string regNr;
         private DateTime arrivalTime;
         private int size;
+
         public Vehicle(string regNr)
         {
             this.regNr = regNr;      
