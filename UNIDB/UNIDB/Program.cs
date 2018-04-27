@@ -103,21 +103,21 @@ namespace UNIDB
                 //    .ToList()
                 //    .ForEach(o => Console.WriteLine($"{o.AddressText}, {o.Town} - {o.Count} employees"));
 
-                var employee = dbContext.Employees.
-                   Where(e => e.EmployeeID == 147)
-                   .Select(e => new
-                   {
-                       e.FirstName,
-                       e.LastName,
-                       e.JobTitle,
-                       Projects = e.EmployeesProjects
-                           .Select(ep => ep.Project.Name)
-                           .OrderBy(p => p)
-                           .ToList()
-                   })
-                   .First();
+                //var employee = dbContext.Employees.
+                //   Where(e => e.EmployeeID == 147)
+                //   .Select(e => new
+                //   {
+                //       e.FirstName,
+                //       e.LastName,
+                //       e.JobTitle,
+                //       Projects = e.EmployeesProjects
+                //           .Select(ep => ep.Project.Name)
+                //           .OrderBy(p => p)
+                //           .ToList()
+                //   })
+                //   .First();
 
-                Console.WriteLine($"{employee.FirstName} {employee.LastName} - {employee.JobTitle}{Environment.NewLine}{String.Join(Environment.NewLine, employee.Projects)}");
+                //Console.WriteLine($"{employee.FirstName} {employee.LastName} - {employee.JobTitle}{Environment.NewLine}{String.Join(Environment.NewLine, employee.Projects)}");
 
                 //dbContext.Departments
                 //   .Include(d => d.Employees)
